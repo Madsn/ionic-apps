@@ -9,7 +9,7 @@ angular.module('starter', ['ionic'])
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs).
-    // The reason we default this to hidden is that native apps don't usually show an accessory bar, at 
+    // The reason we default this to hidden is that native apps don't usually show an accessory bar, at
     // least on iOS. It's a dead giveaway that an app is using a Web View. However, it's sometimes
     // useful especially with forms, though we would prefer giving the user a little more room
     // to interact with the app.
@@ -21,5 +21,17 @@ angular.module('starter', ['ionic'])
       // remove the status bar on iOS or change it to use white instead of dark colors.
       StatusBar.styleDefault();
     }
+    $ionicConfigProvider.tabs.position('bottom');
   });
+})
+
+.config(function($stateProvider, $urlRouterProvider){
+  $stateProvider
+  .state('main', {
+    url: '/main',
+    templateUrl: 'entries/new_entry.html',
+    controller: 'NewEntryCtrl'
+  });
+
+  $urlRouterProvider.otherwise('/main');
 });
