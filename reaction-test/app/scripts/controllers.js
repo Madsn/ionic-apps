@@ -82,8 +82,8 @@ angular.module('starter.controllers', [])
     countdown();
 
     function cancelTimers(){
-      $timeout.cancel(countdown);
-      $timeout.cancel(runGame);
+      $timeout.cancel(timer);
+      $timeout.cancel(timer2);
     }
 
     $scope.clicked = function() {
