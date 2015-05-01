@@ -1,12 +1,19 @@
 <form ng-submit="" ng-controller="NewEntryCtrl">
   <div class="list">
     <label class="item item-input">
-      <select>
+      <select class="col">
         <option>Walther GSP .22</option>
         <option>Pardini .22</option>
         <option>Revolver .22</option>
         <option>Riffel .22</option>
       </select>
+    </label>
+    <label class="item item-input">
+      <input type="date">
+    </label>
+    <ion-toggle toggle-class="toggle-calm">Outdoors</ion-toggle>
+    <label class="item item-input">
+      <input type="number" placeholder="Distance">
     </label>
     <label class="item item-input">
       <input type="number" placeholder="Shots fired">
