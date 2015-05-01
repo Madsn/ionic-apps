@@ -1,3 +1,5 @@
+"use strict";
+
 angular.module('starter.controllers', [])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
@@ -35,14 +37,64 @@ angular.module('starter.controllers', [])
 
 .controller('PlaylistsCtrl', function($scope) {
   $scope.playlists = [
-    { title: 'Reggae', id: 1 },
-    { title: 'Chill', id: 2 },
-    { title: 'Dubstep', id: 3 },
-    { title: 'Indie', id: 4 },
-    { title: 'Rap', id: 5 },
-    { title: 'Cowbell', id: 6 }
+    { title: 'Reaction time', id: 1 }
   ];
 })
 
-.controller('PlaylistCtrl', function($scope, $stateParams) {
+.controller('PlaylistCtrl', function($scope, $stateParams, $timeout) {
+
+    $scope.gameEnded = false;
+    $scope.gameLost = false;
+    $scope.gameWon = false;
+
+    $scope.readyCounter = 5;
+    $scope.gameTimer = 5000;
+    $scope.timerExpired = false;
+    $scope.reactionTime = null;
+    $scope.gameStarted = null;
+    var timer, timer2;
+
+    var runGame = function() {
+      timer2 = $timeout(function () {
+        $scope.gameTimer = $scope.gameTimer-100;
+        if ($scope.gameTimer < 0){
+          $scope.timerExpired = true;
+          $scope.gameStarted = new Date().getTime();
+        } else {
+          runGame();
+        }
+      }, 100);
+    };
+
+    var countdown = function() {
+      timer = $timeout(function () {
+        console.log($scope.readyCounter);
+        $scope.readyCounter--;
+        if ($scope.readyCounter >= 0){
+          countdown();
+        } else {
+          $scope.gameTimer += Math.random()*100;
+          runGame();
+        }
+      }, 1000);
+    };
+
+    countdown();
+
+    function cancelTimers(){
+      $timeout.cancel(countdown);
+      $timeout.cancel(runGame);
+    }
+
+    $scope.clicked = function() {
+      if ($scope.readyCounter >= 0) return;
+      cancelTimers();
+      if ($scope.gameTimer >= 0) {
+        $scope.gameLost = true;
+      } else {
+        $scope.gameWon = true;
+        $scope.reactionTime = new Date().getTime() - $scope.gameStarted;
+      }
+      $scope.gameEnded = true;
+    };
 });
