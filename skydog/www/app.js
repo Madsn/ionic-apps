@@ -21,7 +21,6 @@ angular.module('starter', ['ionic'])
       // remove the status bar on iOS or change it to use white instead of dark colors.
       StatusBar.styleDefault();
     }
-    $ionicConfigProvider.tabs.position('bottom');
   });
 })
 

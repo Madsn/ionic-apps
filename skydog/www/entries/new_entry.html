@@ -1,8 +1,21 @@
-<ion-content>
-  <h1>Hello there</h1>
-  <h1>Hello there</h1>
-  <h1>Hello there</h1>
-  <h1>Hello there</h1>
-  <h1>Hello there</h1>
-  <h1>Hello there</h1>
-</ion-content>
+<form ng-submit="" ng-controller="NewEntryCtrl">
+  <div class="list">
+    <label class="item item-input">
+      <select>
+        <option>Walther GSP .22</option>
+        <option>Pardini .22</option>
+        <option>Revolver .22</option>
+        <option>Riffel .22</option>
+      </select>
+    </label>
+    <label class="item item-input">
+      <input type="number" placeholder="Shots fired">
+    </label>
+    <label class="item item-input">
+      <input type="number" placeholder="Score">
+    </label>
+  </div>
+  <div class="padding">
+    <button type="submit" class="button button-block button-positive">Create Entry</button>
+  </div>
+</form>
