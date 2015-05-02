@@ -1,4 +1,4 @@
-<form ng-submit="" ng-controller="NewEntryCtrl">
+<form ng-submit="">
   <div class="list">
     <label class="item item-input">
       <select class="col">
@@ -9,17 +9,22 @@
       </select>
     </label>
     <label class="item item-input">
+      <span class="input-label">Date</span>
       <input type="date">
     </label>
+    <!-- TODO: Replace with checkbox indoor/outdoor -->
     <ion-toggle toggle-class="toggle-calm">Outdoors</ion-toggle>
     <label class="item item-input">
-      <input type="number" placeholder="Distance">
+      <span class="input-label">Distance</span>
+      <input type="number">
     </label>
     <label class="item item-input">
-      <input type="number" placeholder="Shots fired">
+      <span class="input-label">Shots fired</span>
+      <input type="number">
     </label>
     <label class="item item-input">
-      <input type="number" placeholder="Score">
+      <span class="input-label">Score</span>
+      <input type="number">
     </label>
   </div>
   <div class="padding">
