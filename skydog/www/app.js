@@ -26,11 +26,20 @@ angular.module('starter', ['ionic', 'skydog.utils'])
 
 .config(function($stateProvider, $urlRouterProvider){
   $stateProvider
-  .state('main', {
-    url: '/main',
-    templateUrl: 'entries/new_entry.html',
+  .state('menu', {
+    url: '/menu',
+    templateUrl: 'menu/menu.html'
+  })
+  .state('new', {
+    url: '/new',
+    templateUrl: 'entries/new/new_entry.html',
     controller: 'NewEntryCtrl'
+  })
+  .state('list', {
+    url: '/list',
+    templateUrl: 'entries/list/list_entries.html',
+    controller: 'ListEntriesCtrl'
   });
 
-  $urlRouterProvider.otherwise('/main');
+  $urlRouterProvider.otherwise('/menu');
 });

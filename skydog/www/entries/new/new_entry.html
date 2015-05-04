@@ -8,8 +8,8 @@
       <span class="input-label">Date</span>
       <input type="date" ng-model="entry.date">
     </label>
-    <!-- TODO: Replace with checkbox indoor/outdoor -->
-    <ion-toggle toggle-class="toggle-calm">Outdoors</ion-toggle>
+    <!-- TODO: Improve usability? Remove entirely? -->
+    <ion-toggle toggle-class="toggle-calm" ng-model="entry.outdoors">Outdoors?</ion-toggle>
     <label class="item item-input">
       <span class="input-label">Distance</span>
       <input type="number" ng-model="entry.distance">
