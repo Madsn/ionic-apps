@@ -1,11 +1,7 @@
 <form ng-submit="saveEntry()">
   <div class="list">
     <label class="item item-input">
-      <select class="col">
-        <option>Walther GSP .22</option>
-        <option>Pardini .22</option>
-        <option>Revolver .22</option>
-        <option>Riffel .22</option>
+      <select class="col" ng-model="entry.weapon" ng-options="w as w for w in weapons">
       </select>
     </label>
     <label class="item item-input">
