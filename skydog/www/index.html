@@ -23,11 +23,13 @@
   </head>
 
   <body ng-app="starter">
-      <ion-pane>
-        <ion-header-bar class="bar-positive">
-          <h1 class="title">Header title</h1>
-        </ion-header-bar>
-        <ion-nav-view class="has-header"></ion-nav-view>
-      </ion-pane>
+    <ion-nav-bar class="bar-positive">
+      <ion-nav-back-button
+        class="button-clear">
+        <i class="ion-arrow-left-c"></i> Back
+      </ion-nav-back-button>
+    </ion-nav-bar>
+    <ion-nav-view>
+    </ion-nav-view>
   </body>
 </html>

@@ -1,29 +1,36 @@
-<form ng-submit="saveEntry()">
-  <div class="list">
-    <label class="item item-input">
-      <select class="col" ng-model="entry.weapon" ng-options="w as w for w in weapons">
-      </select>
-    </label>
-    <label class="item item-input">
-      <span class="input-label">Date</span>
-      <input type="date" ng-model="entry.date">
-    </label>
-    <!-- TODO: Improve usability? Remove entirely? -->
-    <ion-toggle toggle-class="toggle-calm" ng-model="entry.outdoors">Outdoors?</ion-toggle>
-    <label class="item item-input">
-      <span class="input-label">Distance</span>
-      <input type="number" ng-model="entry.distance">
-    </label>
-    <label class="item item-input">
-      <span class="input-label">Shots fired</span>
-      <input type="number" ng-model="entry.shots">
-    </label>
-    <label class="item item-input">
-      <span class="input-label">Score</span>
-      <input type="number" ng-model="entry.score">
-    </label>
-  </div>
-  <div class="padding">
-    <button type="submit" class="button button-block button-positive">Create Entry</button>
-  </div>
-</form>
+<ion-view>
+  <ion-nav-title>
+    New Entry Title
+  </ion-nav-title>
+  <ion-content>
+    <form ng-submit="saveEntry()">
+      <div class="list">
+        <label class="item item-input">
+          <select class="col" ng-model="entry.weapon" ng-options="w as w for w in weapons">
+          </select>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Date</span>
+          <input type="date" ng-model="entry.date">
+        </label>
+        <!-- TODO: Improve usability? Remove entirely? -->
+        <ion-toggle toggle-class="toggle-calm" ng-model="entry.outdoors">Outdoors?</ion-toggle>
+        <label class="item item-input">
+          <span class="input-label">Distance</span>
+          <input type="number" ng-model="entry.distance">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Shots fired</span>
+          <input type="number" ng-model="entry.shots">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Score</span>
+          <input type="number" ng-model="entry.score">
+        </label>
+      </div>
+      <div class="padding">
+        <button type="submit" class="button button-block button-positive">Create Entry</button>
+      </div>
+    </form>
+  </ion-content>
+</ion-view>
