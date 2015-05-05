@@ -4,7 +4,7 @@
   </ion-nav-title>
   <ion-content>
     <ion-list>
-      <ion-item ng-repeat="entry in entries">
+      <ion-item ng-repeat="entry in entries" ng-click="openEntry(entry.id)">
         {{entry}}
       </ion-item>
     </ion-list>
