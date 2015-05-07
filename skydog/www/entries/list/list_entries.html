@@ -5,7 +5,18 @@
   <ion-content>
     <ion-list>
       <ion-item ng-repeat="entry in entries" ng-click="openEntry(entry.id)">
-        {{entry}}
+        <h2>
+          Date: {{entry.date | date }}
+        </h2>
+        <p>
+          Weapon: {{entry.weapon}}
+        </p>
+        <p>
+          Shots fired: {{entry.shots}}
+        </p>
+        <p>
+          Distance: {{entry.distance}} meters
+        </p>
       </ion-item>
     </ion-list>
   </ion-content>

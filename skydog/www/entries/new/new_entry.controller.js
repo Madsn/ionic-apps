@@ -7,7 +7,7 @@ angular.module('starter').controller('NewEntryCtrl', function($scope, $localstor
   $scope.entry = {
     id: null,
     weapon: null,
-    date: null,
+    date: new Date(),
     outdoors: false,
     distance: 15,
     shots: 50,
@@ -15,6 +15,7 @@ angular.module('starter').controller('NewEntryCtrl', function($scope, $localstor
   };
 
   $scope.saveEntry = function(){
+    $scope.entry.date.setHours(0,0,0,0);
     $scope.entry.id = $localstorage.getNextId();
     $localstorage.appendObject('entries', $scope.entry);
     $state.go('view', {id: $scope.entry.id});
