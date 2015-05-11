@@ -3,6 +3,23 @@
     View Entry Title
   </ion-nav-title>
   <ion-content>
-    {{entry}}
+    <h2>
+      Date: {{entry.date | date }}
+    </h2>
+    <p>
+      Weapon: {{entry.weapon}}
+    </p>
+    <p>
+      Shots fired: {{entry.shots}}
+    </p>
+    <p>
+      Distance: {{entry.distance}} meters
+    </p>
+    <p>
+      Outdoors?: {{entry.outdoors}}
+    </p>
+    <p>
+			Score: {{entry.score}}
+    </p>
   </ion-content>
 </ion-view>
