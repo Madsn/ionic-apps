@@ -18,5 +18,12 @@ angular.module('starter', ['ionic', 'uiGmapgoogle-maps'])
   });
 })
 .controller('MainCtrl', function($scope){
-  $scope.map = { center: { latitude: 45, longitude: -73 }, zoom: 8 };
+  $scope.map = {center: {latitude: 40.1451, longitude: -99.6680 }, zoom: 4, bounds: {},
+                polygons: [], draw: undefined, options: {disableDefaultUI: true},
+                events: {}};
+
+  $scope.debugPrint = function() {
+    console.log($scope.map.polygons);
+    console.log($scope.map.draw);
+  };
 });
