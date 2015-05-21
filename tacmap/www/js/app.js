@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic', 'uiGmapgoogle-maps'])
+angular.module('starter', ['ionic', 'uiGmapgoogle-maps', 'btford.socket-io'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -17,7 +17,10 @@ angular.module('starter', ['ionic', 'uiGmapgoogle-maps'])
     }
   });
 })
-.controller('MainCtrl', function($scope){
+.factory('sockets', function(socketFactory){
+  return socketFactory();
+})
+.controller('MainCtrl', function($scope, sockets){
   $scope.map = {center: {latitude: 40.1451, longitude: -99.6680 }, zoom: 4, bounds: {},
                 polygons: [], draw: undefined, options: {disableDefaultUI: true},
                 events: {}};
