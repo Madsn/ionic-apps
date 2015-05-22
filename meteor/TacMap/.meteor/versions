@@ -1,6 +1,7 @@
 angular:angular@1.3.15_1
 angular:angular-animate@1.3.15_1
 angular:angular-sanitize@1.3.15_1
+angularui:angular-google-maps@2.1.1
 angularui:angular-ui-router@0.2.14
 autopublish@1.0.3
 autoupdate@1.2.1
@@ -46,6 +47,7 @@ routepolicy@1.0.5
 session@1.1.0
 spacebars@1.0.6
 spacebars-compiler@1.0.6
+stevezhu:lodash@1.0.2
 templating@1.1.1
 tracker@1.0.7
 ui@1.0.6

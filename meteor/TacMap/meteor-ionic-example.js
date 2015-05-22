@@ -5,7 +5,8 @@ if (Meteor.isClient) {
   var app = angular.module('app.example', [
     'angular-meteor',
     'ui.router',
-    'ionic'
+    'ionic',
+    'uiGmapgoogle-maps'
   ]);
 
   function onReady() {
@@ -23,13 +24,18 @@ if (Meteor.isClient) {
   app.config(['$urlRouterProvider', '$stateProvider',
     function($urlRouterProvider, $stateProvider){
 
-    $urlRouterProvider.otherwise("/tabs");
+    $urlRouterProvider.otherwise("/");
 
     $stateProvider
       .state('tabs', {
         url : '/tabs',
         templateUrl: 'index.ng.html',
         controller: 'TodoCtrl'
+      })
+      .state('main', {
+        url : '/',
+        templateUrl: 'main.ng.html',
+        controller: 'MainCtrl'
       });
   }]);
 
@@ -37,6 +43,17 @@ if (Meteor.isClient) {
   // subscribe to the two collections we use
   Meteor.subscribe('Projects');
   Meteor.subscribe('Tasks');
+
+  app.controller('MainCtrl', function($scope){
+    $scope.map = {center: {latitude: 40.1451, longitude: -99.6680 }, zoom: 4, bounds: {},
+                  polygons: [], draw: undefined, options: {disableDefaultUI: true},
+                  events: {}};
+
+    $scope.debugPrint = function() {
+      console.log($scope.map.polygons);
+      console.log($scope.map.draw);
+    };
+  });
 
   app.controller('TodoCtrl', ['$scope', '$meteorCollection', '$ionicModal', '$rootScope', '$ionicSideMenuDelegate', '$ionicPopup',
     function ($scope, $meteorCollection, $ionicModal, $rootScope, $ionicSideMenuDelegate, $ionicPopup, $cordovaDatePicker) {
