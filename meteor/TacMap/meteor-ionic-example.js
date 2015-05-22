@@ -1,6 +1,6 @@
 Projects = new Meteor.Collection("Projects");
 Tasks = new Meteor.Collection("Tasks");
-Polygons = new Meteor.Collection("Polygons3");
+Polygons = new Meteor.Collection("Polygons5");
 
 if (Meteor.isClient) {
   var app = angular.module('app.example', [
@@ -48,10 +48,17 @@ if (Meteor.isClient) {
 
   app.controller('MainCtrl', function($scope, $meteorCollection){
     $scope.map = {center: {latitude: 40.1451, longitude: -99.6680 }, zoom: 4, bounds: {},
-                  options: {disableDefaultUI: true},
-                  events: {}};
+                  draw: undefined, options: {disableDefaultUI: true}, events: {}};
 
     $scope.polygons = $meteorCollection(Polygons);
+    $scope.drawnPolygons = [];
+
+    $scope.$watchCollection('drawnPolygons', function(newValue, oldValue){
+      console.log('Collection updated');
+      if (newValue.length && newValue.length > 0){
+        console.log(newValue);
+      }
+    });
 
     $scope.sync = function(){
       var id = Math.random()*100000;
@@ -77,7 +84,7 @@ if (Meteor.isClient) {
                     weight: 3
                 },
                 editable: true,
-                draggable: true,
+                draggable: false,
                 geodesic: false,
                 visible: true,
                 fill: {

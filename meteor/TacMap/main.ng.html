@@ -1,10 +1,20 @@
 <ion-content ng-controller="MainCtrl">
   <div id="map_canvas">
     <ui-gmap-google-map center="map.center" 
-      zoom="map.zoom" draggable="false" 
-      options="options" bounds="map.bounds">
-      <ui-gmap-polygon static="true" ng-repeat="p in polygons track by p.id" path="p.path" stroke="p.stroke" visible="p.visible"
-               geodesic="p.geodesic" fill="p.fill" fit="false" editable="p.editable" draggable="false"></ui-gmap-polygon>
+        zoom="map.zoom" draggable="false" 
+        options="options" bounds="map.bounds">
+
+      <ui-gmap-free-draw-polygons
+          polygons='drawnPolygons'
+          draw='map.draw'>
+      </ui-gmap-free-draw-polygons>
+
+      <ui-gmap-polygon static="true" ng-repeat="p in polygons track by p.id" 
+          path="p.path" stroke="p.stroke" visible="p.visible"
+          geodesic="p.geodesic" fill="p.fill" fit="false" 
+          editable="p.editable" draggable="p.draggable">
+      </ui-gmap-polygon>
+      
     </ui-gmap-google-map>
   </div>
   <button ng-click="draw()">draw</button>
