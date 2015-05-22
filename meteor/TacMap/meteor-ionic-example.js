@@ -1,5 +1,6 @@
 Projects = new Meteor.Collection("Projects");
 Tasks = new Meteor.Collection("Tasks");
+Polygons = new Meteor.Collection("Polygons");
 
 if (Meteor.isClient) {
   var app = angular.module('app.example', [
@@ -43,14 +44,55 @@ if (Meteor.isClient) {
   // subscribe to the two collections we use
   Meteor.subscribe('Projects');
   Meteor.subscribe('Tasks');
+  Meteor.subscribe('Polygons');
 
-  app.controller('MainCtrl', function($scope){
+  app.controller('MainCtrl', function($scope, $meteorCollection){
     $scope.map = {center: {latitude: 40.1451, longitude: -99.6680 }, zoom: 4, bounds: {},
-                  polygons: [], draw: undefined, options: {disableDefaultUI: true},
+                  draw: undefined, options: {disableDefaultUI: true},
                   events: {}};
 
+    $scope.polygons = [];
+
+    $scope.Polygons = $meteorCollection(Polygons);
+
+    function shallowCopy(oldObj) {
+      var newObj = {};
+      for(var i in oldObj) {
+        if(oldObj.hasOwnProperty(i)) {
+          newObj[i] = oldObj[i];
+        }
+      }
+      return newObj;
+    }
+
+    $scope.sync = function(){
+      console.log(shallowCopy($scope.polygons[0]));
+      $scope.Polygons.save(shallowCopy($scope.polygons[0])).then(function(res){
+        console.log('Response received');
+      });
+    };
+
+/*
+    $scope.$watchCollection('polygons', function(newValue, oldValue) {
+      console.log('Change detected');
+      if (newValue.length && newValue.length > 0) {
+        var newPolygon = newValue[newValue.length -1]
+        console.log(newPolygon);
+        console.log(newValue[0]);
+        console.log(oldValue);
+        $scope.Polygons.save(newPolygon).then(function(res) {
+          console.log('Saved');
+        });
+      }
+    });
+*/
+
+    $scope.draw = function() {
+      $scope.map.draw();
+    };
+
     $scope.debugPrint = function() {
-      console.log($scope.map.polygons);
+      console.log($scope.polygons);
       console.log($scope.map.draw);
     };
   });

@@ -3,12 +3,13 @@
     <ui-gmap-google-map events="map.events" center="map.center" zoom="map.zoom" 
                         draggable="true" options="map.options" bounds="map.bounds">
       <ui-gmap-free-draw-polygons
-          polygons='map.polygons'
+          polygons='polygons'
           draw='map.draw'
       >
       </ui-gmap-free-draw-polygons>
     </ui-gmap-google-map>
   </div>
-  <button ng-click="map.draw()">draw</button>
+  <button ng-click="draw()">draw</button>
   <button ng-click="debugPrint()">debug</button>
+  <button ng-click="sync()">sync</button>
 </ion-content>
