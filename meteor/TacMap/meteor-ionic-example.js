@@ -1,6 +1,6 @@
 Projects = new Meteor.Collection("Projects");
 Tasks = new Meteor.Collection("Tasks");
-Polygons = new Meteor.Collection("Polygons");
+Polygons = new Meteor.Collection("Polygons3");
 
 if (Meteor.isClient) {
   var app = angular.module('app.example', [
@@ -48,44 +48,47 @@ if (Meteor.isClient) {
 
   app.controller('MainCtrl', function($scope, $meteorCollection){
     $scope.map = {center: {latitude: 40.1451, longitude: -99.6680 }, zoom: 4, bounds: {},
-                  draw: undefined, options: {disableDefaultUI: true},
+                  options: {disableDefaultUI: true},
                   events: {}};
 
-    $scope.polygons = [];
-
-    $scope.Polygons = $meteorCollection(Polygons);
-
-    function shallowCopy(oldObj) {
-      var newObj = {};
-      for(var i in oldObj) {
-        if(oldObj.hasOwnProperty(i)) {
-          newObj[i] = oldObj[i];
-        }
-      }
-      return newObj;
-    }
+    $scope.polygons = $meteorCollection(Polygons);
 
     $scope.sync = function(){
-      console.log(shallowCopy($scope.polygons[0]));
-      $scope.Polygons.save(shallowCopy($scope.polygons[0])).then(function(res){
+      var id = Math.random()*100000;
+      var offset = Math.random()*10;
+      var newPoly = {
+                id: id,
+                path: [
+                    {
+                        latitude: 20 + offset,
+                        longitude: -70 + offset
+                    },
+                    {
+                        latitude: 40 + offset,
+                        longitude: -20 + offset
+                    },
+                    {
+                        latitude: 10 + offset,
+                        longitude: -35 + offset
+                    }
+                ],
+                stroke: {
+                    color: '#6060FB',
+                    weight: 3
+                },
+                editable: true,
+                draggable: true,
+                geodesic: false,
+                visible: true,
+                fill: {
+                    color: '#ff0000',
+                    opacity: 0.8
+                }
+            };
+      $scope.polygons.save(newPoly).then(function(res){
         console.log('Response received');
       });
     };
-
-/*
-    $scope.$watchCollection('polygons', function(newValue, oldValue) {
-      console.log('Change detected');
-      if (newValue.length && newValue.length > 0) {
-        var newPolygon = newValue[newValue.length -1]
-        console.log(newPolygon);
-        console.log(newValue[0]);
-        console.log(oldValue);
-        $scope.Polygons.save(newPolygon).then(function(res) {
-          console.log('Saved');
-        });
-      }
-    });
-*/
 
     $scope.draw = function() {
       $scope.map.draw();
@@ -93,7 +96,6 @@ if (Meteor.isClient) {
 
     $scope.debugPrint = function() {
       console.log($scope.polygons);
-      console.log($scope.map.draw);
     };
   });
 
