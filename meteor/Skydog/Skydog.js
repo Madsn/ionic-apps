@@ -1,19 +1,38 @@
+Tasks = new Meteor.Collection("Tasks");
+
 if (Meteor.isClient) {
-  // counter starts at 0
-  Session.setDefault('counter', 0);
+  var app = angular.module('skydog.main', [
+    'angular-meteor',
+    'ui.router',
+    'ionic'
+  ]);
 
-  Template.hello.helpers({
-    counter: function () {
-      return Session.get('counter');
-    }
-  });
+  function onReady() {
+    angular.bootstrap(document, ['skydog.main']);
+  }
 
-  Template.hello.events({
-    'click button': function () {
-      // increment the counter when button is clicked
-      Session.set('counter', Session.get('counter') + 1);
-    }
-  });
+  if (Meteor.isCordova) {
+    angular.element(document).on("deviceready", onReady);
+  }
+  else {
+    angular.element(document).ready(onReady);
+  }
+
+
+  app.config(['$urlRouterProvider', '$stateProvider',
+    function($urlRouterProvider, $stateProvider){
+
+    $urlRouterProvider.otherwise("/");
+
+    $stateProvider
+      .state('main', {
+        url : '/',
+        templateUrl: 'client/main/main.ng.html',
+        controller: 'MainCtrl'
+      });
+  }]);
+
+  Meteor.subscribe('Tasks');
 }
 
 if (Meteor.isServer) {
