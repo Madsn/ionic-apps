@@ -1,1 +1,0 @@
-App.setPreference('AutoHideSplashScreen' ,'true');
