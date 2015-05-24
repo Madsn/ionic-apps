@@ -4,16 +4,30 @@
 </head>
 
 <body>
-    {{> map}}
+    {{> main}}
 </body>
 
-<template name="map">
+<template name="main">
     <div id="container">
-      <h1 class="title">Meteor Leaflet Demo</h1>
-      <div id="map" class="map"></div>
-      <div class="notice">
-        Double-click on map creates a marker<br>
-        Click on a marker to delete it
+      <div class="row">
+        <div class="col-md-12">
+          <div class="page-header">
+            <h1 class="text-center">Meteor Leaflet Demo</h1>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div id="map" class="map"></div>
+        </div>
+        <div class="col-md-4">
+
+        </div>
+      </div>
+      <div class="row">
+        <div class="notice">
+          Double-click on map creates a marker<br>
+          Click on a marker to delete it
+        </div>
       </div>
     </div>
 </template>
+

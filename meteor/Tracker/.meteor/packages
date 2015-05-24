@@ -8,3 +8,4 @@ meteor-platform
 autopublish
 insecure
 bevanhunt:leaflet
+twbs:bootstrap

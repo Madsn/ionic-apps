@@ -4,7 +4,7 @@ if (Meteor.isClient) {
 
   Meteor.subscribe('markers');
 
-  Template.map.rendered = function() {
+  Template.main.rendered = function() {
     L.Icon.Default.imagePath = 'packages/bevanhunt_leaflet/images';
 
     var map = L.map('map', {
