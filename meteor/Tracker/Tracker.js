@@ -1,6 +1,8 @@
+Messages = new Meteor.Collection('messages');
+Markers = new Meteor.Collection('markers');
+
 if (Meteor.isClient) {
   /// create marker collection
-  var Markers = new Meteor.Collection('markers');
 
   Meteor.subscribe('markers');
 
@@ -9,7 +11,7 @@ if (Meteor.isClient) {
 
     var map = L.map('map', {
       doubleClickZoom: false
-    }).setView([49.25044, -123.137], 13);
+    }).setView([55.4833, 8.45], 13);
 
     L.tileLayer.provider('Thunderforest.Outdoors').addTo(map);
 
@@ -41,6 +43,30 @@ if (Meteor.isClient) {
     });
   };
 
+  Template.messages.messages = function(){
+    return Messages.find({}, { sort: { time: -1 }});
+  };
+
+  Template.input.events = {
+    "keydown #message": function(event){
+      if(event.which == 13){ // Enter key
+        // Submit the form
+        var name = document.getElementById('name');
+        var message = document.getElementById('message');
+
+        if(name.value != '' && message.value != ''){
+          Messages.insert({
+            name: name.value,
+            message: message.value,
+            time: Date.now()
+          });
+
+          message.value = '';
+        }
+      }
+    }
+  };
+
   $(function() {
     $(window).resize(function() {
       $('#map').css('height', window.innerHeight - 82 - 45);
@@ -54,7 +80,6 @@ if (Meteor.isServer) {
     // code to run on server at startup
   });
 
-  var Markers = new Meteor.Collection('markers');
   Meteor.publish("markers", function () {
     return Markers.find();
   });

@@ -19,15 +19,39 @@
           <div id="map" class="map"></div>
         </div>
         <div class="col-md-4">
-
+          {{> chat}}
         </div>
       </div>
       <div class="row">
-        <div class="notice">
-          Double-click on map creates a marker<br>
-          Click on a marker to delete it
+        <div class="col-md-12">
+          <div class="notice text-center">
+            Double-click on map creates a marker<br>
+            Click on a marker to delete it
+          </div>
         </div>
       </div>
     </div>
 </template>
 
+<template name="chat">
+  {{> messages}}
+  {{> input}}
+</template>
+
+<template name="input">
+  <input type="text" id="name" placeholder="Name" /> <input type="text" id="message" placeholder="Your Message" />
+</template>
+
+<template name="messages">
+  <div id="messages">
+    {{#each messages}}
+      {{> message}}
+    {{/each}}
+  </div>
+</template>
+
+<template name="message">
+  <p>
+    <strong>{{name}}</strong>: {{message}}
+  </p>
+</template>
