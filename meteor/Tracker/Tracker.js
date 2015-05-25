@@ -8,6 +8,12 @@ if (Meteor.isClient) {
   Meteor.subscribe('markers');
   Meteor.subscribe('logs');
 
+  var scrollToBottom = function(_id){
+    var scrollDiv = document.getElementById(_id);
+    scrollDiv.scrollTop = scrollDiv.scrollHeight;
+    console.log('scrolling to bottom', _id);
+  };
+
   Template.main.rendered = function() {
     L.Icon.Default.imagePath = 'packages/bevanhunt_leaflet/images';
 
@@ -18,8 +24,11 @@ if (Meteor.isClient) {
     L.tileLayer.provider('Thunderforest.Outdoors').addTo(map);
 
     map.on('dblclick', function(event) {
-      Markers.insert({latlng: event.latlng});
-      Logs.insert({latlng: event.latlng, time: Date.now(), user: Session.get('username'), new: true});
+      if (Session.get('username') != null) {
+        Markers.insert({latlng: event.latlng});
+        Logs.insert({latlng: event.latlng, time: Date.now(), user: Session.get('username'), new: true});
+        scrollToBottom('log');
+      }
     });
 
     var query = Markers.find();
@@ -30,6 +39,7 @@ if (Meteor.isClient) {
             map.removeLayer(marker);
             Markers.remove({_id: document._id});
             Logs.insert({latlng: event.latlng, time: Date.now(), user: Session.get('username'), new: false});
+            scrollToBottom('log');
           });
       },
       removed: function (oldDocument) {
@@ -65,7 +75,7 @@ if (Meteor.isClient) {
         // Submit the form
         var message = document.getElementById('message');
 
-        if(name.value != '' && message.value != ''){
+        if(message.value != ''){
           Messages.insert({
             name: Session.get('username'),
             message: message.value,
@@ -73,8 +83,7 @@ if (Meteor.isClient) {
           });
 
           message.value = '';
-          var messageDiv = document.getElementById('messages');
-          messageDiv.scrollTop = messageDiv.scrollHeight;
+          scrollToBottom('messages');
         }
       }
     }
@@ -97,10 +106,16 @@ if (Meteor.isClient) {
     $(window).resize(function() {
       var height = window.innerHeight - 175;
       $('#map').css('height', height);
-      $('#messages').css('height', height/2);
-      $('#log').css('height', height/2);
+      $('#messages').css('height', height/2 - 70);
+      $('#log').css('height', height/2 - 130);
+      scrollToBottom('messages');
+      scrollToBottom('log');
     });
     $(window).resize(); // trigger resize event
+    setTimeout(function() {
+      scrollToBottom('messages');
+      scrollToBottom('log');
+    }, 500);
   });
 }
 

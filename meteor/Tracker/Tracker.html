@@ -34,30 +34,40 @@
       </div>
     </div>
   </div>
-
 </template>
 
 
 <template name="chat">
-  {{> messages}}
-  {{#if name}}
-    {{> input}}
-  {{else}}
-    {{> login}}
-  {{/if}}
+  <div class="panel panel-default">
+    <div class="panel-heading">Chat</div>
+    <div class="panel-body">
+      {{> messages}}
+      {{#if name}}
+        {{> input}}
+      {{else}}
+        {{> login}}
+      {{/if}}
+    </div>
+  </div>
 </template>
 
 <template name="log">
-  <div id="log" class="scrollable">
-    {{#each logs}}
-      <p>
-      {{#if new}}
-        New marker added by {{user}} {{prettifyDate time}} - ({{latlng.lat}} / {{latlng.lng}})
-      {{else}}
-        Marker deleted by {{user}} {{prettifyDate time}} - ({{latlng.lat}} / {{latlng.lng}})
-      {{/if}}
-      </p>
-    {{/each}}
+  <div class="panel panel-default">
+    <div class="panel-heading">Log</div>
+    <div class="panel-body">
+      <div id="log" class="scrollable">
+        {{#each logs}}
+          <p>
+            <strong>{{prettifyDate time}}</strong><br/>
+            {{#if new}}
+              New marker added by {{user}} - ({{latlng.lat}} / {{latlng.lng}})
+            {{else}}
+              Marker deleted by {{user}} - ({{latlng.lat}} / {{latlng.lng}})
+            {{/if}}
+          </p>
+        {{/each}}
+      </div>
+    </div>
   </div>
 </template>
 
