@@ -1,10 +1,12 @@
 Messages = new Meteor.Collection('messages');
+Logs = new Meteor.Collection('logs');
 Markers = new Meteor.Collection('markers');
 
 if (Meteor.isClient) {
   /// create marker collection
 
   Meteor.subscribe('markers');
+  Meteor.subscribe('logs');
 
   Template.main.rendered = function() {
     L.Icon.Default.imagePath = 'packages/bevanhunt_leaflet/images';
@@ -17,6 +19,7 @@ if (Meteor.isClient) {
 
     map.on('dblclick', function(event) {
       Markers.insert({latlng: event.latlng});
+      Logs.insert({latlng: event.latlng, time: Date.now(), user: Session.get('username'), new: true});
     });
 
     var query = Markers.find();
@@ -26,6 +29,7 @@ if (Meteor.isClient) {
           .on('click', function(event) {
             map.removeLayer(marker);
             Markers.remove({_id: document._id});
+            Logs.insert({latlng: event.latlng, time: Date.now(), user: Session.get('username'), new: false});
           });
       },
       removed: function (oldDocument) {
@@ -43,8 +47,16 @@ if (Meteor.isClient) {
     });
   };
 
+  Template.registerHelper("prettifyDate", function(timestamp) {
+    return moment(new Date(timestamp)).fromNow();
+  });
+
   Template.messages.messages = function(){
     return Messages.find({}, { sort: { time: 1 }});
+  };
+
+  Template.log.logs = function(){
+    return Logs.find({}, { sort: {time: 1}});
   };
 
   Template.input.events = {
@@ -83,7 +95,10 @@ if (Meteor.isClient) {
 
   $(function() {
     $(window).resize(function() {
-      $('#map, #messages').css('height', window.innerHeight - 175);
+      var height = window.innerHeight - 175;
+      $('#map').css('height', height);
+      $('#messages').css('height', height/2);
+      $('#log').css('height', height/2);
     });
     $(window).resize(); // trigger resize event
   });

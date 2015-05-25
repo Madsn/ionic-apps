@@ -17,7 +17,12 @@
         <div id="map" class="map"></div>
       </div>
       <div id="chat" class="col-md-4">
-        {{> chat}}
+        <div class="row">
+          {{> log}}
+        </div>
+        <div class="row">
+          {{> chat}}
+        </div>
       </div>
     </div>
     <div class="row">
@@ -42,6 +47,20 @@
   {{/if}}
 </template>
 
+<template name="log">
+  <div id="log" class="scrollable">
+    {{#each logs}}
+      <p>
+      {{#if new}}
+        New marker added by {{user}} {{prettifyDate time}} - ({{latlng.lat}} / {{latlng.lng}})
+      {{else}}
+        Marker deleted by {{user}} {{prettifyDate time}} - ({{latlng.lat}} / {{latlng.lng}})
+      {{/if}}
+      </p>
+    {{/each}}
+  </div>
+</template>
+
 <template name="input">
   <input type="text" id="message" placeholder="Your Message" />
 </template>
@@ -51,7 +70,7 @@
 </template>
 
 <template name="messages">
-  <div id="messages">
+  <div id="messages" class="scrollable">
     {{#each messages}}
       {{> message}}
     {{/each}}
