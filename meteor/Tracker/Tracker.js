@@ -51,18 +51,30 @@ if (Meteor.isClient) {
     "keydown #message": function(event){
       if(event.which == 13){ // Enter key
         // Submit the form
-        var name = document.getElementById('name');
         var message = document.getElementById('message');
 
         if(name.value != '' && message.value != ''){
           Messages.insert({
-            name: name.value,
+            name: Session.get('username'),
             message: message.value,
             time: Date.now()
           });
 
           message.value = '';
         }
+      }
+    }
+  };
+
+  Template.chat.name = function(){
+    return Session.get('username');
+  };
+
+  Template.login.events = {
+    "keydown #name": function(event){
+      if(event.which == 13){ // Enter key
+        var name = document.getElementById('name');
+        Session.set('username', name.value);
       }
     }
   };

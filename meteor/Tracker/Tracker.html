@@ -8,38 +8,46 @@
 </body>
 
 <template name="main">
-    <div id="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="page-header">
-            <h1 class="text-center">Meteor Leaflet Demo</h1>
-          </div>
-        </div>
-        <div class="col-md-8">
-          <div id="map" class="map"></div>
-        </div>
-        <div class="col-md-4">
-          {{> chat}}
-        </div>
+  <div id="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 class="text-center">Meteor Leaflet Demo</h1>
       </div>
-      <div class="row">
-        <div class="col-md-12">
-          <div class="notice text-center">
-            Double-click on map creates a marker<br>
-            Click on a marker to delete it
-          </div>
+      <div class="col-md-8">
+        <div id="map" class="map"></div>
+      </div>
+      <div class="col-md-4">
+        {{> chat}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="notice text-center">
+          Double-click on map creates a marker<br>
+          Click on a marker to delete it
         </div>
       </div>
     </div>
+  </div>
+
 </template>
+
 
 <template name="chat">
   {{> messages}}
-  {{> input}}
+  {{#if name}}
+    {{> input}}
+  {{else}}
+    {{> login}}
+  {{/if}}
 </template>
 
 <template name="input">
-  <input type="text" id="name" placeholder="Name" /> <input type="text" id="message" placeholder="Your Message" />
+  <input type="text" id="message" placeholder="Your Message" />
+</template>
+
+<template name="login">
+  <input type="text" id="name" placeholder="Name" />
 </template>
 
 <template name="messages">
