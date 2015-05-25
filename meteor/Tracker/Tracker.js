@@ -10,8 +10,10 @@ if (Meteor.isClient) {
 
   var scrollToBottom = function(_id){
     var scrollDiv = document.getElementById(_id);
-    scrollDiv.scrollTop = scrollDiv.scrollHeight;
-    console.log('scrolling to bottom', _id);
+    if (scrollDiv) {
+      scrollDiv.scrollTop = scrollDiv.scrollHeight;
+      console.log('scrolling to bottom', _id);
+    }
   };
 
   Template.main.rendered = function() {
@@ -27,7 +29,6 @@ if (Meteor.isClient) {
       if (Session.get('username') != null) {
         Markers.insert({latlng: event.latlng});
         Logs.insert({latlng: event.latlng, time: Date.now(), user: Session.get('username'), new: true});
-        scrollToBottom('log');
       }
     });
 
@@ -39,7 +40,6 @@ if (Meteor.isClient) {
             map.removeLayer(marker);
             Markers.remove({_id: document._id});
             Logs.insert({latlng: event.latlng, time: Date.now(), user: Session.get('username'), new: false});
-            scrollToBottom('log');
           });
       },
       removed: function (oldDocument) {
@@ -83,7 +83,6 @@ if (Meteor.isClient) {
           });
 
           message.value = '';
-          scrollToBottom('messages');
         }
       }
     }
@@ -115,7 +114,15 @@ if (Meteor.isClient) {
     setTimeout(function() {
       scrollToBottom('messages');
       scrollToBottom('log');
-    }, 500);
+    }, 1000);
+  });
+
+  Messages.after.insert(function(){
+    scrollToBottom('messages');
+  });
+
+  Logs.after.insert(function(){
+    scrollToBottom('log');
   });
 }
 
