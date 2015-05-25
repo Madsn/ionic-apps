@@ -39,7 +39,11 @@
 
 <template name="chat">
   <div class="panel panel-default">
-    <div class="panel-heading">Chat</div>
+    <div class="panel-heading">
+      <h2 class="panel-title">
+        Chat
+      </h2>
+    </div>
     <div class="panel-body">
       {{> messages}}
       {{#if name}}
@@ -53,7 +57,11 @@
 
 <template name="log">
   <div class="panel panel-default">
-    <div class="panel-heading">Log</div>
+    <div class="panel-heading">
+      <h2 class="panel-title">
+        Log
+      </h2>
+    </div>
     <div class="panel-body">
       <div id="log" class="scrollable">
         {{#each logs}}
