@@ -44,7 +44,7 @@ if (Meteor.isClient) {
   };
 
   Template.messages.messages = function(){
-    return Messages.find({}, { sort: { time: -1 }});
+    return Messages.find({}, { sort: { time: 1 }});
   };
 
   Template.input.events = {
@@ -61,6 +61,8 @@ if (Meteor.isClient) {
           });
 
           message.value = '';
+          var messageDiv = document.getElementById('messages');
+          messageDiv.scrollTop = messageDiv.scrollHeight;
         }
       }
     }
@@ -81,7 +83,7 @@ if (Meteor.isClient) {
 
   $(function() {
     $(window).resize(function() {
-      $('#map').css('height', window.innerHeight - 82 - 45);
+      $('#map, #messages').css('height', window.innerHeight - 175);
     });
     $(window).resize(); // trigger resize event
   });
