@@ -1,1 +1,1 @@
-lb-ng ./server/server.js ./client/app/js/lb-services.js
+lb-ng ./server/server.js ./client/app/lib/lb-services.js
