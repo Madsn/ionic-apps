@@ -6,3 +6,4 @@ build/
 dist/
 .idea/
 tacmap/www/lib/
+legeplads/strongloop.json
