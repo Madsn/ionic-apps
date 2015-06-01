@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('starter.controllers', [])
+angular.module('starter.controllers', ['uiGmapgoogle-maps', 'ionic'])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
 
@@ -48,4 +48,11 @@ angular.module('starter.controllers', [])
 })
 .controller('PlaylistCtrl', function($scope, Song) {
   $scope.songs = Song.find();
+})
+.controller('MapCtrl', function($scope) {
+  console.log('MapCtrl loaded');
+  //map variable containing the map details, will be referenced from the html
+  $scope.map = {center: {latitude: 51.219053, longitude: 4.404418 }, zoom: 14 };
+  //map options
+  $scope.options = {scrollwheel: false};
 });

@@ -57,6 +57,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'lbServices'])
       }
     }
   })
+  .state('app.map', {
+    url: '/map',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/map.html',
+        controller: 'MapCtrl'
+      }
+    }
+  })
 
   .state('app.single', {
     url: '/playlists/:playlistId',
@@ -70,10 +79,18 @@ angular.module('starter', ['ionic', 'starter.controllers', 'lbServices'])
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/playlists');
 })
-.config(function(LoopBackResourceProvider) {
+.config(function(LoopBackResourceProvider, uiGmapGoogleMapApiProvider) {
   // Use a custom auth header instead of the default 'Authorization'
   LoopBackResourceProvider.setAuthHeader('X-Access-Token');
 
   // Change the URL where to access the LoopBack REST API server
   LoopBackResourceProvider.setUrlBase('http://localhost:3000/api/');
+
+  uiGmapGoogleMapApiProvider.configure({
+    key: 'your api key',
+    v: '3.17',
+    libraries: '',
+    language: 'en',
+    sensor: 'false',
+  });
 });
