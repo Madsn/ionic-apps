@@ -31,5 +31,13 @@
   "Role": {
     "dataSource": "db",
     "public": false
+  },
+  "song": {
+    "dataSource": "db",
+    "public": true
+  },
+  "playlist": {
+    "dataSource": "db",
+    "public": true
   }
 }
