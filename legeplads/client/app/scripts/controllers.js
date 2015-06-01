@@ -52,8 +52,10 @@ angular.module('starter.controllers', [])
     { title: 'Rap', id: 5 },
     { title: 'Cowbell', id: 6 }
   ];
-});
-/*
+})
 .controller('PlaylistCtrl', function($scope, $stateParams) {
+  $scope.songs = [
+    { title: 'Highway to Hell', artist: 'AC/DC', id: 1},
+    { title: 'Good Vibrations', artist: 'Beach Boys', id: 2}
+  ];
 });
-*/
