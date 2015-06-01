@@ -22,6 +22,7 @@ module.exports = function (grunt) {
       // configurable paths
       app: 'app',
       scripts: 'scripts',
+      lib: 'lib',
       styles: 'styles',
       images: 'images',
       test: 'test',
@@ -68,7 +69,8 @@ module.exports = function (grunt) {
         tasks: ['newer:copy:app']
       },
       js: {
-        files: ['<%= yeoman.app %>/<%= yeoman.scripts %>/**/*.js'],
+        files: ['<%= yeoman.app %>/<%= yeoman.scripts %>/**/*.js',
+                '<%= yeoman.app %>/<%= yeoman.lib %>/**/*.js'],
         tasks: ['newer:copy:app', 'newer:jshint:all']
       },
       styles: {
@@ -157,7 +159,7 @@ module.exports = function (grunt) {
       }
     },
 
-    
+
 
     // Reads HTML for usemin blocks to enable smart builds that automatically
     // concat, minify and revision files. Creates configurations in memory so
@@ -513,7 +515,7 @@ module.exports = function (grunt) {
     'htmlmin'
   ]);
 
-  grunt.registerTask('coverage', 
+  grunt.registerTask('coverage',
     ['karma:continuous',
     'connect:coverage:keepalive'
   ]);
