@@ -7,3 +7,5 @@ dist/
 .idea/
 tacmap/www/lib/
 legeplads/strongloop.json
+legeplads/arc-manager.json
+legeplads-*.tgz

@@ -25,5 +25,15 @@
     "type": "",
     "url": ""
   },
-  "description": "legeplads"
+  "description": "legeplads",
+  "bundleDependencies": [
+    "compression",
+    "cors",
+    "errorhandler",
+    "loopback",
+    "loopback-boot",
+    "loopback-datasource-juggler",
+    "loopback-explorer",
+    "serve-favicon"
+  ]
 }
