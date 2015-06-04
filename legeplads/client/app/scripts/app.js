@@ -5,7 +5,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'lbServices'])
+angular.module('starter', ['ionic', 'uiGmapgoogle-maps', 'lbServices'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -87,9 +87,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'lbServices'])
   LoopBackResourceProvider.setUrlBase('http://localhost:3000/api/');
 
   uiGmapGoogleMapApiProvider.configure({
-    key: 'your api key',
-    v: '3.17',
-    libraries: '',
+    key: 'AIzaSyD6056FtfuxdiEC3OXRKvYr1R1tg-N4u9Q',
+    v: '3.21',
+    libraries: 'drawing',
     language: 'en',
     sensor: 'false',
   });

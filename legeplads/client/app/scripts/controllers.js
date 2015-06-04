@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('starter.controllers', ['uiGmapgoogle-maps', 'ionic'])
+angular.module('starter')
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
 
@@ -49,10 +49,47 @@ angular.module('starter.controllers', ['uiGmapgoogle-maps', 'ionic'])
 .controller('PlaylistCtrl', function($scope, Song) {
   $scope.songs = Song.find();
 })
-.controller('MapCtrl', function($scope) {
-  console.log('MapCtrl loaded');
-  //map variable containing the map details, will be referenced from the html
-  $scope.map = {center: {latitude: 51.219053, longitude: 4.404418 }, zoom: 14 };
-  //map options
-  $scope.options = {scrollwheel: false};
+.controller('MapCtrl', function($scope, uiGmapGoogleMapApi) {
+  uiGmapGoogleMapApi.then(function(maps) {
+    console.log('Lib loaded');
+    console.log(maps);
+
+    $scope.drawingManagerOptions = {
+      drawingMode: maps.drawing.OverlayType.MARKER,
+      drawingControl: true,
+      drawingControlOptions: {
+        position: maps.ControlPosition.TOP_CENTER,
+          drawingModes: [
+            maps.drawing.OverlayType.MARKER,
+            maps.drawing.OverlayType.CIRCLE,
+            maps.drawing.OverlayType.POLYGON,
+            maps.drawing.OverlayType.POLYLINE,
+            maps.drawing.OverlayType.RECTANGLE
+          ]
+      },
+      circleOptions: {
+        fillColor: '#ffff00',
+          fillOpacity: 1,
+          strokeWeight: 5,
+          clickable: false,
+          editable: true,
+          zIndex: 1
+        }
+      };
+    $scope.markersAndCircleFlag = true;
+    $scope.drawingManagerControl = {};
+    $scope.$watch('markersAndCircleFlag', function() {
+      if (!$scope.drawingManagerControl.getDrawingManager) {
+        return;
+      }
+      var controlOptions = angular.copy($scope.drawingManagerOptions);
+      if (!$scope.markersAndCircleFlag) {
+        controlOptions.drawingControlOptions.drawingModes.shift();
+        controlOptions.drawingControlOptions.drawingModes.shift();
+      }
+      $scope.drawingManagerControl.getDrawingManager().setOptions(controlOptions);
+    });
+    $scope.map = {center: {latitude: 40.1451, longitude: -99.6680 }, zoom: 4, bounds: {}};
+    $scope.options = {scrollwheel: false};
+  });
 });
