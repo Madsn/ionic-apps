@@ -51,33 +51,17 @@ angular.module('starter')
 })
 .controller('MapCtrl', function($scope, uiGmapGoogleMapApi) {
   uiGmapGoogleMapApi.then(function(maps) {
-    console.log('Lib loaded');
-    console.log(maps);
 
     $scope.drawingManagerOptions = {
       drawingMode: false,
       drawingControl: true,
-      drawingControlOptions: {
-        position: maps.ControlPosition.TOP_CENTER,
-          drawingModes: [
-            maps.drawing.OverlayType.MARKER
-          ]
-        }
-      };
-    $scope.markersAndCircleFlag = true;
-    $scope.drawingManagerControl = {};
-    $scope.$watch('markersAndCircleFlag', function() {
-      if (!$scope.drawingManagerControl.getDrawingManager) {
-        return;
-      }
-      var controlOptions = angular.copy($scope.drawingManagerOptions);
-      if (!$scope.markersAndCircleFlag) {
-        controlOptions.drawingControlOptions.drawingModes.shift();
-        controlOptions.drawingControlOptions.drawingModes.shift();
-      }
-      $scope.drawingManagerControl.getDrawingManager().setOptions(controlOptions);
-    });
+      position: maps.ControlPosition.TOP_CENTER,
+        drawingModes: [
+          maps.drawing.OverlayType.MARKER
+        ]
+    };
     $scope.map = {center: {latitude: 40.1451, longitude: -99.6680 }, zoom: 4, bounds: {}};
     $scope.options = {scrollwheel: true};
   });
+
 });
