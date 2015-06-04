@@ -55,25 +55,13 @@ angular.module('starter')
     console.log(maps);
 
     $scope.drawingManagerOptions = {
-      drawingMode: maps.drawing.OverlayType.MARKER,
+      drawingMode: false,
       drawingControl: true,
       drawingControlOptions: {
         position: maps.ControlPosition.TOP_CENTER,
           drawingModes: [
-            maps.drawing.OverlayType.MARKER,
-            maps.drawing.OverlayType.CIRCLE,
-            maps.drawing.OverlayType.POLYGON,
-            maps.drawing.OverlayType.POLYLINE,
-            maps.drawing.OverlayType.RECTANGLE
+            maps.drawing.OverlayType.MARKER
           ]
-      },
-      circleOptions: {
-        fillColor: '#ffff00',
-          fillOpacity: 1,
-          strokeWeight: 5,
-          clickable: false,
-          editable: true,
-          zIndex: 1
         }
       };
     $scope.markersAndCircleFlag = true;
@@ -90,6 +78,6 @@ angular.module('starter')
       $scope.drawingManagerControl.getDrawingManager().setOptions(controlOptions);
     });
     $scope.map = {center: {latitude: 40.1451, longitude: -99.6680 }, zoom: 4, bounds: {}};
-    $scope.options = {scrollwheel: false};
+    $scope.options = {scrollwheel: true};
   });
 });

@@ -59,7 +59,7 @@ angular.module('starter', ['ionic', 'uiGmapgoogle-maps', 'lbServices'])
     }
   });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/playlists');
+  $urlRouterProvider.otherwise('/app/map');
 })
 .config(function(LoopBackResourceProvider, uiGmapGoogleMapApiProvider) {
   // Use a custom auth header instead of the default 'Authorization'
