@@ -30,24 +30,6 @@ angular.module('starter', ['ionic', 'uiGmapgoogle-maps', 'lbServices'])
     templateUrl: 'templates/menu.html',
     controller: 'AppCtrl'
   })
-
-  .state('app.search', {
-    url: '/search',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/search.html'
-      }
-    }
-  })
-
-  .state('app.browse', {
-    url: '/browse',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/browse.html'
-      }
-    }
-  })
   .state('app.playlists', {
     url: '/playlists',
     views: {
@@ -84,7 +66,7 @@ angular.module('starter', ['ionic', 'uiGmapgoogle-maps', 'lbServices'])
   LoopBackResourceProvider.setAuthHeader('X-Access-Token');
 
   // Change the URL where to access the LoopBack REST API server
-  LoopBackResourceProvider.setUrlBase('http://localhost:3000/api/');
+  LoopBackResourceProvider.setUrlBase('http://localhost:3000/api');
 
   uiGmapGoogleMapApiProvider.configure({
     key: 'AIzaSyD6056FtfuxdiEC3OXRKvYr1R1tg-N4u9Q',
