@@ -50,7 +50,7 @@ angular.module('starter')
   $scope.songs = Song.find();
 })
 .controller('MapCtrl', function($scope, uiGmapGoogleMapApi) {
-  uiGmapGoogleMapApi.then(function(maps) {
+  uiGmapGoogleMapApi.then(function() {
 
     $scope.markers = [];
 
@@ -62,7 +62,6 @@ angular.module('starter')
       $scope.$apply(function(){
         $scope.markers.push({
           id: Math.random() * 100000,
-          position: new maps.LatLng(lat, lon),
           latitude: lat,
           longitude: lon,
           showWindow: true,
@@ -72,7 +71,7 @@ angular.module('starter')
           }
         });
       });
-    }
+    };
 
     $scope.map = {
       center: {latitude: 40.1451, longitude: -99.6680 },
