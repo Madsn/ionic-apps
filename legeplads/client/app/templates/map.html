@@ -2,7 +2,8 @@
   <ion-content>
     <h1>Map</h1>
     <div id="map_canvas">
-      <ui-gmap-google-map control="map.control" draggable="true" zoom="map.zoom" center="map.center" events="map.events">
+      <ui-gmap-google-map control="map.control" draggable="true"
+        zoom="map.zoom" center="map.center" events="map.events" options="map.options">
         <ui-gmap-markers models="markers" coords="'self'" click="click"></ui-gmap-markers>
       </ui-gmap-google-map>
     </div>
