@@ -50,18 +50,40 @@ angular.module('starter')
   $scope.songs = Song.find();
 })
 .controller('MapCtrl', function($scope, uiGmapGoogleMapApi) {
+
+  $scope.markers = [];
   uiGmapGoogleMapApi.then(function(maps) {
 
-    $scope.drawingManagerOptions = {
-      drawingMode: false,
-      drawingControl: true,
-      position: maps.ControlPosition.TOP_CENTER,
-        drawingModes: [
-          maps.drawing.OverlayType.MARKER
-        ]
+
+    $scope.map = {
+      center: {latitude: 40.1451, longitude: -99.6680 },
+      zoom: 4,
+      bounds: {},
+      control: {},
+      events: {
+        click: function(marker, eventName, args){
+          var e = args[0];
+          var lat = e.latLng.lat(),
+              lon = e.latLng.lng();
+          console.log('clicked, lat: ' + lat + ' lon: ' + lon);
+          $scope.markers.push({
+            id: Math.random() * 100000,
+            position: new maps.LatLng(lat, lon),
+            latitude: lat,
+            longitude: lon,
+            showWindow: true,
+            title: 'Marker 0',
+            click: function(){
+              console.log('marker clicked, lat: ' + lat + ' lon: ' + lon);
+            }
+          });
+          console.log($scope.markers);
+        }
+      }
     };
-    $scope.map = {center: {latitude: 40.1451, longitude: -99.6680 }, zoom: 4, bounds: {}};
+
     $scope.options = {scrollwheel: true};
+
   });
 
 });
